@@ -12,11 +12,11 @@ import Solid.S.Automovil;
  * @author eduaralexis
  */
 public class AutomovilDB {
-    void guardarAutomovilDB(Automovil automovil) {
+    public void guardarAutomovilDB(Automovil automovil) {
         System.out.println("Guardando en BD");
     }
 
-    void eliminarAutomovilDB(Automovil automovil) {
+    public void eliminarAutomovilDB(Automovil automovil) {
         System.out.println("Eliminando automovil de la BD");
     }
 }

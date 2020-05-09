@@ -25,6 +25,7 @@ import Solid.O.Ford_O;
 import Solid.O.Mercedes_O;
 import Solid.O.Renault_O;
 import Solid.S.Automovil;
+import Solid.S.AutomovilDB;
 
 /**
  *
@@ -45,20 +46,32 @@ public class Main {
             new Automovil("Audi")
         };
 
+        System.out.println("Funcionalidad mostrar Automoviles");
         imprimirPrecioMedioAutomovil_SRP(arrayAutomoviles_S);
 
+        System.out.println("Funcionalidad persistencia Automoviles");
+
+        AutomovilDB automovilDB = new AutomovilDB();
+        automovilDB.guardarAutomovilDB(arrayAutomoviles_S[0]);
+        automovilDB.eliminarAutomovilDB(arrayAutomoviles_S[1]);
+        System.out.println();
+        
         System.out.println("****************************");
         System.out.println("Principio de abierto cerrado");
         System.out.println("****************************");
         AbsAutomovil_O[] arrayAutomoviles_O = {
             new Renault_O(),
             new Audi_O(),
-            new Mercedes_O()
-        //,new Ford_O()
+            new Mercedes_O(),
+            new Ford_O()
         };
-
+        
+        System.out.println("Principio de abierto cerrado no se ccumple");
+        imprimirPrecioMedioAutomovil(arrayAutomoviles_O);
+        
+        System.out.println("Principio de abierto cerrado se cumple");
         imprimirPrecioMedioAutomovil_OCP(arrayAutomoviles_O);
-
+        
         System.out.println("****************************");
         System.out.println("Principio de Liskov");
         System.out.println("****************************");
@@ -113,6 +126,21 @@ public class Main {
         System.out.println();
     }
 
+    public static void imprimirPrecioMedioAutomovil(AbsAutomovil_O[] arrayAutomoviles) {
+        for (AbsAutomovil_O automovil : arrayAutomoviles) {
+            if (automovil.getMarcaAutomovil().equals("Renault")) {
+                System.out.println(automovil.getMarcaAutomovil() + " tiene costo de $7800000");
+            }
+            if (automovil.getMarcaAutomovil().equals("Audi")) {
+                System.out.println(automovil.getMarcaAutomovil() + " tiene costo de $8500000");
+            }
+            if (automovil.getMarcaAutomovil().equals("Ford")) {
+                System.out.println(automovil.getMarcaAutomovil() + " tiene costo de $10000000");
+            }
+        }
+        System.out.println();
+    }
+    
     public static void imprimirPrecioMedioAutomovil_OCP(AbsAutomovil_O[] arrayAutomoviles) {
         for (AbsAutomovil_O automovil : arrayAutomoviles) {
             System.out.println(automovil.getMarcaAutomovil() + " tiene un precio medio de $" + automovil.precioMedioAutomovil());
@@ -136,9 +164,9 @@ public class Main {
                 System.out.println(automovil.getMarcaAutomovil() + " tiene " + numAsientosMercedes((Mercedes_O) automovil) + " asientos y su precio medio es $" + automovil.precioMedioAutomovil());
 
             }
-            /*if(automovil instanceof Ford_O){
+            if(automovil instanceof Ford_O){
                 System.out.println(automovil.getMarcaAutomovil() + " tiene " + numAsientosFord((Ford_O) automovil) + " asientos y su precio medio es $" + automovil.precioMedioAutomovil());
-            }*/
+            }
         }
         System.out.println();
     }
